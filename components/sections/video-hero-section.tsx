@@ -44,71 +44,56 @@ export function VideoHeroSection() {
         <div className="absolute inset-0 bg-grid-pattern"></div>
       </div>
 
-      {/* Animated Geometric Elements */}
+      {/* Simplified Geometric Elements - Reduced number and complexity */}
       <div className="absolute inset-0 z-10 overflow-hidden">
-        {/* Large triangle */}
+        {/* Large triangle - simplified animation */}
         <motion.div
-          initial={{ opacity: 0, scale: 0, rotate: -30 }}
-          animate={{ opacity: isLoaded ? 0.15 : 0, scale: isLoaded ? 1 : 0, rotate: 0 }}
-          transition={{ duration: 1.2, delay: 0.3, type: "spring" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isLoaded ? 0.15 : 0 }}
+          transition={{ duration: 0.6 }}
           className="absolute -top-20 -right-20 w-96 h-96"
         >
           <div className="w-full h-full border-[40px] border-primary/20 rounded-3xl transform rotate-45"></div>
         </motion.div>
 
-        {/* Floating triangles */}
-        {[...Array(5)].map((_, i) => (
+        {/* Reduced number of floating triangles */}
+        {[...Array(2)].map((_, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 100, x: -50 + i * 30 }}
-            animate={{
-              opacity: isLoaded ? 0.3 : 0,
-              y: isLoaded ? 0 : 100,
-              x: isLoaded ? -20 + i * 40 : -50 + i * 30,
-            }}
-            transition={{
-              duration: 2,
-              delay: 0.5 + i * 0.2,
-              repeat: Number.POSITIVE_INFINITY,
-              repeatType: "reverse",
-              repeatDelay: i * 0.5,
-            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isLoaded ? 0.3 : 0 }}
+            transition={{ duration: 0.6, delay: 0.2 * i }}
             className="absolute bottom-40 left-1/4"
+            style={{ transform: `translateX(${i * 40}px)` }}
           >
             <div
               className="w-0 h-0 border-l-[15px] border-l-transparent border-b-[25.98px] border-b-primary border-r-[15px] border-r-transparent"
-              style={{ opacity: 0.5 - i * 0.08 }}
+              style={{ opacity: 0.5 - i * 0.1 }}
             ></div>
           </motion.div>
         ))}
 
-        {/* Circle elements */}
+        {/* Single circle element instead of multiple */}
         <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: isLoaded ? 0.2 : 0, scale: isLoaded ? 1 : 0 }}
-          transition={{ duration: 1, delay: 0.7 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isLoaded ? 0.2 : 0 }}
+          transition={{ duration: 0.6 }}
           className="absolute top-1/4 left-1/5 w-32 h-32 rounded-full border-4 border-primary/30"
-        />
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: isLoaded ? 0.15 : 0, scale: isLoaded ? 1 : 0 }}
-          transition={{ duration: 1, delay: 0.9 }}
-          className="absolute bottom-1/4 right-1/5 w-24 h-24 rounded-full bg-primary/10"
         />
       </div>
 
-      {/* Content */}
+      {/* Content - simplified animations */}
       <div className="container relative z-20 h-full flex flex-col justify-center items-start px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.5 }}
           className="max-w-4xl"
         >
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 50 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+            transition={{ duration: 0.5 }}
             className="inline-block mb-4 py-1 px-3 bg-primary/20 backdrop-blur-sm rounded-full"
           >
             <span className="text-white font-medium">Crafting Excellence Since 2010</span>
@@ -118,47 +103,35 @@ export function VideoHeroSection() {
             className="text-5xl font-bold tracking-tighter text-white sm:text-6xl md:text-7xl lg:text-8xl mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <motion.span
-              className="block"
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-            >
-              Custom Signage &
-            </motion.span>
-            <motion.span
-              className="block text-primary relative"
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-            >
+            <span className="block">Custom Signage &</span>
+            <span className="block text-primary relative">
               Joinery Solutions
               <motion.div
                 className="absolute -bottom-3 left-0 h-1 bg-primary"
                 initial={{ width: 0 }}
                 animate={{ width: "40%" }}
-                transition={{ duration: 1.2, delay: 1.3 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               />
-            </motion.span>
+            </span>
           </motion.h1>
 
           <motion.p
             className="max-w-[700px] text-xl md:text-2xl text-gray-200 mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-            transition={{ duration: 0.8, delay: 1.1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             Transforming spaces and elevating experiences with bespoke designs that leave a lasting impression across
             the UAE.
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 mb-20 sm:mb-0" // Added bottom margin on mobile
+            className="flex flex-col sm:flex-row gap-4 mb-20 sm:mb-0"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-            transition={{ duration: 0.8, delay: 1.3 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
             <Button
               asChild
@@ -180,17 +153,15 @@ export function VideoHeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator - Moved to bottom center with better positioning */}
+        {/* Scroll Indicator - simplified animation */}
         <motion.div
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isLoaded ? 1 : 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <motion.div
+          <div
             className="flex flex-col items-center cursor-pointer"
-            whileHover={{ y: 5 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
             onClick={() => {
               const servicesSection = document.getElementById("services")
               if (servicesSection) {
@@ -202,11 +173,11 @@ export function VideoHeroSection() {
             <motion.div
               className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-white/50"
               animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, repeatType: "loop" }}
+              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, repeatType: "loop", repeatDelay: 1 }}
             >
               <ChevronDown className="h-5 w-5 text-white" />
             </motion.div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>

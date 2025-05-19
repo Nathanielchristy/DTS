@@ -50,45 +50,45 @@ export function TestimonialsSection() {
     if (isAnimating) return
     setIsAnimating(true)
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+    // Reset animation state after a short delay
+    setTimeout(() => setIsAnimating(false), 300)
   }
 
   const prevTestimonial = () => {
     if (isAnimating) return
     setIsAnimating(true)
     setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
+    // Reset animation state after a short delay
+    setTimeout(() => setIsAnimating(false), 300)
   }
 
   useEffect(() => {
-    // Auto-advance testimonials every 8 seconds
+    // Auto-advance testimonials every 10 seconds (increased from 8)
     const interval = setInterval(() => {
       nextTestimonial()
-    }, 8000)
+    }, 10000)
 
     return () => clearInterval(interval)
   }, [])
 
+  // Simplified animation variants
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  }
+
   return (
     <section id="testimonials" ref={ref} className="w-full py-20 md:py-32 bg-secondary/5 relative overflow-hidden">
-      {/* Decorative elements inspired by logo */}
-      <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        animate={inView ? { opacity: 0.05, x: 0 } : { opacity: 0, x: -100 }}
-        transition={{ duration: 1 }}
-        className="absolute left-0 top-0 w-64 h-64 bg-secondary rounded-full -translate-x-1/2 -translate-y-1/2"
-      />
-
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={inView ? { opacity: 0.1, y: 0 } : { opacity: 0, y: 100 }}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="absolute right-20 bottom-20 w-0 h-0 border-l-[40px] border-l-transparent border-b-[69.3px] border-b-primary border-r-[40px] border-r-transparent"
-      />
+      {/* Simplified decorative elements */}
+      <div className="absolute left-0 top-0 w-64 h-64 bg-secondary/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute right-20 bottom-20 w-0 h-0 border-l-[40px] border-l-transparent border-b-[69.3px] border-b-primary/10 border-r-[40px] border-r-transparent"></div>
 
       <div className="container px-4 md:px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8 }}
+          variants={fadeIn}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          transition={{ duration: 0.5 }}
           className="flex flex-col items-center justify-center space-y-4 text-center mb-12"
         >
           <div className="space-y-2">
@@ -100,30 +100,17 @@ export function TestimonialsSection() {
         </motion.div>
 
         <div className="max-w-5xl mx-auto relative">
-          {/* Large quote icon */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={inView ? { opacity: 0.1, scale: 1 } : { opacity: 0, scale: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="absolute -top-10 -left-10 z-0"
-          >
+          {/* Static quote icon instead of animated */}
+          <div className="absolute -top-10 -left-10 z-0 opacity-10">
             <Quote className="h-32 w-32 text-primary" />
-          </motion.div>
+          </div>
 
-          {/* Testimonial carousel */}
+          {/* Testimonial carousel - simplified animations */}
           <div className="relative overflow-hidden rounded-lg bg-background shadow-lg">
             <div className="flex items-center justify-between p-6 md:p-10">
               <div className="flex flex-col md:flex-row items-center gap-8 w-full">
                 {/* Client image */}
-                <motion.div
-                  key={`image-${testimonials[currentIndex].id}`}
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 50 }}
-                  transition={{ duration: 0.5 }}
-                  onAnimationComplete={() => setIsAnimating(false)}
-                  className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden flex-shrink-0 border-4 border-primary/20"
-                >
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden flex-shrink-0 border-4 border-primary/20">
                   <Image
                     src={testimonials[currentIndex].image || "/placeholder.svg"}
                     alt={testimonials[currentIndex].name}
@@ -131,34 +118,20 @@ export function TestimonialsSection() {
                     height={128}
                     className="w-full h-full object-cover"
                   />
-                </motion.div>
+                </div>
 
                 {/* Testimonial content */}
                 <div className="flex-1">
-                  <motion.blockquote
-                    key={`quote-${testimonials[currentIndex].id}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="text-lg md:text-xl italic mb-4 text-center md:text-left"
-                  >
+                  <blockquote className="text-lg md:text-xl italic mb-4 text-center md:text-left">
                     "{testimonials[currentIndex].quote}"
-                  </motion.blockquote>
+                  </blockquote>
 
-                  <motion.div
-                    key={`author-${testimonials[currentIndex].id}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="text-center md:text-left"
-                  >
+                  <div className="text-center md:text-left">
                     <p className="font-bold text-lg">{testimonials[currentIndex].name}</p>
                     <p className="text-muted-foreground">
                       {testimonials[currentIndex].role}, {testimonials[currentIndex].company}
                     </p>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -172,6 +145,7 @@ export function TestimonialsSection() {
                     if (!isAnimating) {
                       setIsAnimating(true)
                       setCurrentIndex(index)
+                      setTimeout(() => setIsAnimating(false), 300)
                     }
                   }}
                   className={`w-3 h-3 rounded-full transition-all duration-300 ${

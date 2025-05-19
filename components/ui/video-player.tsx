@@ -63,13 +63,8 @@ export function VideoPlayer({
       {/* Video Overlay */}
       <div className={`absolute inset-0 z-10 ${overlayColor}`}></div>
 
-      {/* Video with subtle zoom effect */}
-      <motion.div
-        initial={{ scale: 1 }}
-        animate={{ scale: 1.05 }}
-        transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
-        className="absolute inset-0 w-full h-full"
-      >
+      {/* Video - removed zoom animation */}
+      <div className="absolute inset-0 w-full h-full">
         <video
           ref={videoRef}
           autoPlay={autoPlay}
@@ -83,14 +78,14 @@ export function VideoPlayer({
           <source src={src} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-      </motion.div>
+      </div>
 
       {/* Controls */}
       {showControls && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: isLoaded ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.3 }}
           className="absolute bottom-4 right-4 z-20 flex gap-2"
         >
           <button
@@ -110,11 +105,11 @@ export function VideoPlayer({
         </motion.div>
       )}
 
-      {/* Logo Watermark */}
+      {/* Logo Watermark - simplified animation */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 0.7 : 0 }}
-        transition={{ duration: 0.5, delay: 1 }}
+        transition={{ duration: 0.3 }}
         className="absolute top-4 right-4 z-20"
       >
         <div className="w-16 h-16 relative">

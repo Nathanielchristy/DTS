@@ -45,13 +45,20 @@ export function VideoGallery() {
     },
   ]
 
+  // Simplified animation variants
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  }
+
   return (
     <section id="videos" ref={ref} className="w-full py-20 md:py-32 bg-secondary/5 overflow-hidden">
       <div className="container px-4 md:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8 }}
+          variants={fadeIn}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          transition={{ duration: 0.5 }}
           className="flex flex-col items-center justify-center space-y-4 text-center mb-12"
         >
           <div className="space-y-2">
@@ -64,9 +71,10 @@ export function VideoGallery() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={fadeIn}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-2 relative rounded-lg overflow-hidden shadow-xl"
           >
             <div className="aspect-video">
@@ -88,20 +96,18 @@ export function VideoGallery() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            variants={fadeIn}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col gap-4"
           >
             <h3 className="text-xl font-bold">Video Gallery</h3>
             <p className="text-muted-foreground mb-4">Select a video to watch:</p>
 
             {videoOptions.map((video, index) => (
-              <motion.div
+              <div
                 key={video.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                 className={`relative rounded-lg overflow-hidden cursor-pointer group ${
                   activeVideo.src === video.src ? "ring-2 ring-primary" : "hover:ring-1 hover:ring-primary/50"
                 }`}
@@ -126,7 +132,7 @@ export function VideoGallery() {
                 <div className="p-2 bg-background">
                   <h4 className="font-medium text-sm">{video.title}</h4>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </div>
